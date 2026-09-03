@@ -8,6 +8,7 @@ import { LessonStrip } from "./LessonStrip";
 import { ProgressToggle } from "./ProgressToggle";
 import { jsRunFor } from "@/lib/jsRun";
 import { JsPlayground } from "./JsPlayground";
+import { TalkPanel } from "./TalkPanel";
 import { TopicVisual } from "./visuals/TopicVisual";
 
 export function TopicArticle({ topic }: { topic: Topic }) {
@@ -36,6 +37,10 @@ export function TopicArticle({ topic }: { topic: Topic }) {
       </div>
 
       <LessonStrip topic={topic} />
+
+      <section className="mt-6">
+        <TalkPanel key={topic.slug} topic={topic} />
+      </section>
 
       {topic.complexity ? (
         <div className="mt-4 flex flex-wrap gap-3 text-sm">

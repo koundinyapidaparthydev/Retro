@@ -143,10 +143,10 @@ function generateQa(topic: Topic): TopicQa {
   if (topic.track === "dsa") {
     return {
       howQuestionsCome: [
-        `"Here's an array / graph / string. Can you use ${name}?"`,
-        tip ? `"${tip}"` : `"Can you do better than the brute force?"`,
-        `"Walk a tiny example, then code."`,
-        pit ? `"What goes wrong if ${pit.toLowerCase()}"` : `"Empty input, n=1, already sorted — what happens?"`,
+        topic.practiceIdeas[0] ?? `Here is an array / graph / string. Find the answer in better than brute force.`,
+        tip ? `${tip}` : `Can you do better than checking every pair / every cell?`,
+        `Walk a tiny example, then code. Do not start from the algorithm name.`,
+        pit ? `What goes wrong if ${pit.toLowerCase()}` : `Empty input, n=1, already sorted — what happens?`,
       ].slice(0, 4),
       howToAnswer: {
         firstMinute: `${topic.summary} I'd dry-run a tiny case first, then say the invariant and the complexity${topic.complexity ? ` (${topic.complexity.time} time, ${topic.complexity.space} space)` : ""}.`,
