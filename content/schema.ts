@@ -1,4 +1,4 @@
-export type TrackId = "dsa" | "hld" | "lld" | "ai";
+export type TrackId = "java" | "dsa" | "hld" | "lld" | "ai";
 
 export type Depth = "core" | "next" | "advanced";
 
@@ -37,6 +37,12 @@ export const TRACKS: Record<
   TrackId,
   { id: TrackId; label: string; full: string; blurb: string }
 > = {
+  java: {
+    id: "java",
+    label: "Java",
+    full: "Java for interviews",
+    blurb: "Basics → collections → recursion — enough Java to write DSA solutions.",
+  },
   dsa: {
     id: "dsa",
     label: "DSA",

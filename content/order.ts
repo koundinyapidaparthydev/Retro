@@ -66,7 +66,18 @@ const AI_CATEGORY_ORDER = [
   "Interview",
 ] as const;
 
+const JAVA_CATEGORY_ORDER = [
+  "First programs",
+  "Types & values",
+  "Control flow",
+  "Arrays & strings",
+  "Methods & classes",
+  "Collections for DSA",
+  "Ready for DSA",
+] as const;
+
 const CATEGORY_ORDER: Record<TrackId, readonly string[]> = {
+  java: JAVA_CATEGORY_ORDER,
   dsa: DSA_CATEGORY_ORDER,
   hld: HLD_CATEGORY_ORDER,
   lld: LLD_CATEGORY_ORDER,
@@ -366,7 +377,29 @@ const AI_MUST_HAVES = [
   "analytics-qa-design",
 ];
 
+const JAVA_MUST_HAVES = [
+  "hello-java",
+  "online-playgrounds",
+  "variables-types",
+  "strings-basics",
+  "operators-if",
+  "loops",
+  "arrays-fixed",
+  "stringbuilder",
+  "methods",
+  "classes-objects",
+  "null-refs",
+  "arraylist",
+  "hashmap",
+  "stack-queue",
+  "priority-queue",
+  "sorting-java",
+  "recursion-java",
+  "java-for-neetcode",
+];
+
 const MUST_HAVES: Record<TrackId, string[]> = {
+  java: JAVA_MUST_HAVES,
   dsa: DSA_MUST_HAVES,
   hld: HLD_MUST_HAVES,
   lld: LLD_MUST_HAVES,
@@ -382,11 +415,11 @@ export function sortTopicsForListing(topics: Topic[], track: TrackId): Topic[] {
   const must = MUST_HAVES[track] ?? [];
   const mustIndex = new Map(must.map((slug, index) => [slug, index]));
   return [...topics].sort((a, b) => {
-    const depth = DEPTH_RANK[a.depth] - DEPTH_RANK[b.depth];
-    if (depth) return depth;
     const mustA = mustIndex.get(a.slug) ?? 10_000;
     const mustB = mustIndex.get(b.slug) ?? 10_000;
     if (mustA !== mustB) return mustA - mustB;
+    const depth = DEPTH_RANK[a.depth] - DEPTH_RANK[b.depth];
+    if (depth) return depth;
     return a.title.localeCompare(b.title);
   });
 }

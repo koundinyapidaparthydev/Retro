@@ -3,18 +3,19 @@ import { TRACKS } from "./schema";
 import { aiTopics } from "./ai";
 import { dsaTopics } from "./dsa";
 import { hldTopics } from "./hld";
+import { javaTopics } from "./java";
 import { lldTopics } from "./lld";
 import { categoryLabel, depthRank, orderedCategories, sortTopicsForListing } from "./order";
 
 export { TRACKS, categoryLabel };
 export type { Depth, Topic, TrackId };
 
-export const allTopics: Topic[] = [...dsaTopics, ...hldTopics, ...lldTopics, ...aiTopics];
+export const allTopics: Topic[] = [...javaTopics, ...dsaTopics, ...hldTopics, ...lldTopics, ...aiTopics];
 
 const byKey = new Map(allTopics.map((topic) => [`${topic.track}:${topic.slug}`, topic]));
 
 export function isTrack(value: string): value is TrackId {
-  return value === "dsa" || value === "hld" || value === "lld" || value === "ai";
+  return value === "java" || value === "dsa" || value === "hld" || value === "lld" || value === "ai";
 }
 
 export function topicsFor(track: TrackId): Topic[] {
@@ -107,10 +108,10 @@ export function trackStats(track: TrackId) {
 
 export function featuredCoreTopics(): Topic[] {
   const slugs: [TrackId, string][] = [
+    ["java", "hello-java"],
+    ["java", "hashmap"],
+    ["dsa", "nc-contains-duplicate"],
     ["dsa", "binary-search"],
-    ["dsa", "two-pointers"],
-    ["dsa", "bfs"],
-    ["dsa", "knapsack-01"],
     ["hld", "url-shortener"],
     ["lld", "parking-lot"],
     ["ai", "tokens"],
