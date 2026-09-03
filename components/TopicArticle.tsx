@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Topic } from "@/content/schema";
-import { resolveRelated, topicPath } from "@/content/catalog";
-import { CompanyAsks } from "./CompanyAsks";
+import { topicPath } from "@/content/catalog";
+import { neighborTopic } from "@/lib/learn";
 import { DepthBadge } from "./DepthBadge";
 import { InterviewQa } from "./InterviewQa";
 import { LessonStrip } from "./LessonStrip";
@@ -12,16 +12,13 @@ import { TalkPanel } from "./TalkPanel";
 import { TopicVisual } from "./visuals/TopicVisual";
 
 export function TopicArticle({ topic }: { topic: Topic }) {
-  const related = topic.related
-    .map((slug) => resolveRelated(topic, slug))
-    .filter((item): item is Topic => Boolean(item));
+  const next = neighborTopic(topic, 1);
+  const prev = neighborTopic(topic, -1);
 
   return (
     <article>
       <p className="text-sm text-slate">
-        <Link href={`/${topic.track}`} className="text-accent-deep hover:underline">
-          {topic.track.toUpperCase()}
-        </Link>
+        {topic.track.toUpperCase()}
         <span className="mx-2 text-fog">/</span>
         {topic.category}
       </p>
@@ -31,7 +28,6 @@ export function TopicArticle({ topic }: { topic: Topic }) {
         </h1>
         <DepthBadge depth={topic.depth} />
       </div>
-      <CompanyAsks track={topic.track} slug={topic.slug} />
       <div className="mt-4">
         <ProgressToggle track={topic.track} slug={topic.slug} />
       </div>
@@ -77,22 +73,22 @@ export function TopicArticle({ topic }: { topic: Topic }) {
         <InterviewQa topic={topic} />
       </section>
 
-      {related.length ? (
-        <section className="mt-8">
-          <p className="eyebrow">Related</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {related.map((item) => (
-              <Link
-                key={`${item.track}:${item.slug}`}
-                href={topicPath(item)}
-                className="rounded-full border border-line bg-white px-3 py-1 text-sm text-ink-soft hover:border-accent hover:text-accent-deep"
-              >
-                {item.title}
-              </Link>
-            ))}
-          </div>
-        </section>
-      ) : null}
+      <nav className="mt-10 flex flex-wrap justify-between gap-4 text-sm">
+        {prev ? (
+          <Link href={topicPath(prev)} className="text-slate hover:text-ink">
+            Previous: {prev.title}
+          </Link>
+        ) : (
+          <span />
+        )}
+        {next ? (
+          <Link href={topicPath(next)} className="text-ink underline underline-offset-4">
+            Next: {next.title}
+          </Link>
+        ) : (
+          <span className="text-fog">Last in this chapter</span>
+        )}
+      </nav>
 
       <details className="sky-card mt-10 p-5">
         <summary className="cursor-pointer font-medium text-ink">More notes if you want them</summary>

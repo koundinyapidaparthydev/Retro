@@ -44,7 +44,7 @@ export function GraphVisual() {
               y1={na.y}
               x2={nb.x}
               y2={nb.y}
-              stroke={lit ? "#4984fd" : "#d4d4d8"}
+              stroke={lit ? "#2a2a2a" : "#d4d4d8"}
               strokeWidth="1.4"
             />
           );
@@ -58,8 +58,8 @@ export function GraphVisual() {
                 cx={node.x}
                 cy={node.y}
                 r={active ? 8 : 6.5}
-                fill={active ? "#4984fd" : visited ? "#9cc6ff" : "#fff"}
-                stroke="#4984fd"
+                fill={active ? "#2a2a2a" : visited ? "#c8c4bc" : "#f3f1eb"}
+                stroke="#2a2a2a"
                 strokeWidth="1.2"
               />
               <text

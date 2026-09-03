@@ -7,10 +7,10 @@ export const metadata = {
 export default function SearchPage() {
   return (
     <div>
-      <p className="eyebrow">Find a topic</p>
-      <h1 className="mt-3 font-serif text-5xl tracking-tight">Search the archive</h1>
-      <p className="mt-3 max-w-2xl text-ink-soft">
-        Titles, easy definitions, and theory. Filter by track when you already know the lane.
+      <p className="eyebrow">Search</p>
+      <h1 className="mt-3 font-serif text-4xl tracking-tight">Find one title</h1>
+      <p className="mt-3 max-w-xl text-ink-soft">
+        Search stays on DSA. Switch the path on the left if you want HLD or LLD later.
       </p>
       <SearchPanel />
     </div>

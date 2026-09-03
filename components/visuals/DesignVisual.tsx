@@ -5,7 +5,7 @@ import type { DiagramNode, TopicDiagram } from "@/content/diagrams";
 import { usePlayback } from "./usePlayback";
 
 function boxClass(active: boolean, dim = false) {
-  if (active) return "border-accent bg-accent text-white shadow-[0_0_0_4px_rgba(73,132,253,0.12)]";
+  if (active) return "border-accent bg-accent text-paper";
   if (dim) return "border-line bg-white text-fog opacity-40";
   return "border-line bg-white text-ink";
 }
@@ -179,7 +179,7 @@ function GraphSvg({ diagram, highlight }: { diagram: TopicDiagram; highlight: Se
   return (
     <svg viewBox="0 0 100 100" className="mx-auto h-56 w-full max-w-md">
       {diagram.kind === "ring" ? (
-        <circle cx="50" cy="50" r="36" fill="none" stroke="#9cc6ff" strokeWidth="1.2" strokeDasharray="3 3" />
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#c8c4bc" strokeWidth="1.2" strokeDasharray="3 3" />
       ) : null}
       {diagram.edges.map((edge) => {
         const a = byId.get(edge.from);
@@ -194,12 +194,12 @@ function GraphSvg({ diagram, highlight }: { diagram: TopicDiagram; highlight: Se
               y1={a.y}
               x2={b.x}
               y2={b.y}
-              stroke={cut ? "#0544a8" : lit ? "#4984fd" : "#d4d4d8"}
+              stroke={cut ? "#1c1c1c" : lit ? "#2a2a2a" : "#d4d4d8"}
               strokeWidth={cut ? 2 : 1.4}
               strokeDasharray={cut || edge.style === "dashed" ? "3 2" : undefined}
             />
             {edge.label ? (
-              <text x={(a.x + b.x) / 2} y={(a.y + b.y) / 2 - 2} textAnchor="middle" fontSize="3.4" fill="#0544a8">
+              <text x={(a.x + b.x) / 2} y={(a.y + b.y) / 2 - 2} textAnchor="middle" fontSize="3.4" fill="#1c1c1c">
                 {edge.label}
               </text>
             ) : null}
@@ -214,8 +214,8 @@ function GraphSvg({ diagram, highlight }: { diagram: TopicDiagram; highlight: Se
               cx={node.x}
               cy={node.y}
               r={active ? 8 : 6.4}
-              fill={active ? "#4984fd" : "#fff"}
-              stroke="#4984fd"
+              fill={active ? "#2a2a2a" : "#f3f1eb"}
+              stroke="#2a2a2a"
               strokeWidth="1.2"
             />
             <text

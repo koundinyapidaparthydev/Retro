@@ -35,7 +35,7 @@ export function FlowPlayer({
               onClick={() => setIndex(i)}
               className={`rounded-2xl border px-4 py-3 text-left transition ${
                 active
-                  ? "border-accent bg-sky-wash shadow-[0_0_0_4px_rgba(73,132,253,0.12)]"
+                  ? "border-accent bg-sky-wash"
                   : "border-line bg-white text-slate"
               }`}
             >

@@ -16,8 +16,8 @@ export function JsPlayground({ run }: { run: JsRun }) {
 
   return (
     <div className="overflow-hidden rounded-2xl border border-line">
-      <div className="flex items-center justify-between bg-[#0b1220] px-4 py-2">
-        <p className="text-xs font-medium tracking-wide text-[#9cc6ff]">{run.title}</p>
+      <div className="flex items-center justify-between bg-ink px-4 py-2">
+        <p className="text-xs font-medium tracking-wide text-paper">{run.title}</p>
         <button
           type="button"
           onClick={() => {
