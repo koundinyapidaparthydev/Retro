@@ -1,0 +1,24 @@
+1:"$Sreact.fragment"
+2:I[44568,["/Retro/_next/static/chunks/01al5k0ad3vpn.js","/Retro/_next/static/chunks/09-2f4d3k3lp3.js"],"SearchPanel"]
+3:I[97367,["/Retro/_next/static/chunks/01al5k0ad3vpn.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+8:I[97367,["/Retro/_next/static/chunks/01al5k0ad3vpn.js"],"ViewportBoundary"]
+9:I[97367,["/Retro/_next/static/chunks/01al5k0ad3vpn.js"],"MetadataBoundary"]
+b:I[39756,["/Retro/_next/static/chunks/01al5k0ad3vpn.js"],"default"]
+c:I[37457,["/Retro/_next/static/chunks/01al5k0ad3vpn.js"],"default"]
+f:I[70119,["/Retro/_next/static/chunks/01al5k0ad3vpn.js"],"Header"]
+10:I[22016,["/Retro/_next/static/chunks/01al5k0ad3vpn.js"],""]
+:HL["/Retro/_next/static/chunks/0dt6whf3_74le.css","style"]
+7:X
+e:X
+e:C
+0:{"buildId":"_rsW8y4JfWsgiIwDAH-B1","data":[{"rsc":["$","$1","c",{"children":[["$","div",null,{"children":[["$","p",null,{"className":"eyebrow","children":"Find a topic"}],["$","h1",null,{"className":"mt-3 font-serif text-5xl tracking-tight","children":"Search the archive"}],["$","p",null,{"className":"mt-3 max-w-2xl text-ink-soft","children":"Titles, easy definitions, and theory. Filter by track when you already know the lane."}],["$","$L2",null,{}]]}],[["$","script","script-0",{"src":"/Retro/_next/static/chunks/09-2f4d3k3lp3.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Search · RETRO"}],["$","meta","1",{"name":"description","content":"Easy definitions, animated flows, and tiny examples for interview DSA, high-level design, and low-level design."}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@a","staleTime":"$7","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@d","staleTime":"$7","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Retro/_next/static/chunks/0dt6whf3_74le.css","precedence":"next"}],["$","script","script-0",{"src":"/Retro/_next/static/chunks/01al5k0ad3vpn.js","async":true}]],["$","html",null,{"lang":"en","className":"geist_9c6cb61b-module__8NX9hq__variable eb_garamond_8c417efa-module__JJkH3G__variable","children":["$","body",null,{"className":"font-sans antialiased","children":["$","div",null,{"className":"relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col px-4 pb-20 pt-5 sm:px-6","children":[["$","$Lf",null,{}],["$","main",null,{"className":"flex-1 pt-10","children":["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}],"notFound":[["$","div",null,{"children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"className":"mt-3 font-serif text-4xl","children":"This topic is not in the archive yet."}],["$","p",null,{"className":"mt-3 text-slate","children":"The slug is wrong, or it is waiting for a later pass."}],["$","$L10",null,{"href":"/","className":"mt-6 inline-block text-accent-deep hover:underline","children":"Back home"}]]}],[]]}]}],["$","footer",null,{"className":"mt-20 border-t border-line pt-6 text-sm text-slate","children":"RETRO · easy first · deepen later"}]]}]}]}]]}],"isPartial":"$@11","staleTime":"$7","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@12","rootVaryParams":null,"needsRuntimeRequest":"$@13"}
+5:null
+7:300
+13:true
+7:C
+12:0
+a:"$undefined"
+d:"$undefined"
+11:"$undefined"
+6:"$undefined"
