@@ -6,6 +6,8 @@ import { DepthBadge } from "./DepthBadge";
 import { InterviewQa } from "./InterviewQa";
 import { LessonStrip } from "./LessonStrip";
 import { ProgressToggle } from "./ProgressToggle";
+import { jsRunFor } from "@/lib/jsRun";
+import { JsPlayground } from "./JsPlayground";
 import { TopicVisual } from "./visuals/TopicVisual";
 
 export function TopicArticle({ topic }: { topic: Topic }) {
@@ -53,6 +55,18 @@ export function TopicArticle({ topic }: { topic: Topic }) {
           <TopicVisual topic={topic} />
         </div>
       </section>
+
+      {topic.track === "dsa" ? (
+        <section className="mt-8">
+          <h2 className="font-serif text-3xl text-ink">Run it in JavaScript</h2>
+          <p className="mt-1 text-sm text-slate">
+            Left is the snippet. Right is the console — one <code>console.log</code> at a time.
+          </p>
+          <div className="mt-4">
+            <JsPlayground run={jsRunFor(topic)} />
+          </div>
+        </section>
+      ) : null}
 
       <section className="mt-8">
         <InterviewQa topic={topic} />
