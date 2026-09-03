@@ -1,5 +1,6 @@
 import type { Depth, Topic, TrackId } from "./schema";
 import { TRACKS } from "./schema";
+import { aiTopics } from "./ai";
 import { dsaTopics } from "./dsa";
 import { hldTopics } from "./hld";
 import { lldTopics } from "./lld";
@@ -8,12 +9,12 @@ import { categoryLabel, depthRank, orderedCategories, sortTopicsForListing } fro
 export { TRACKS, categoryLabel };
 export type { Depth, Topic, TrackId };
 
-export const allTopics: Topic[] = [...dsaTopics, ...hldTopics, ...lldTopics];
+export const allTopics: Topic[] = [...dsaTopics, ...hldTopics, ...lldTopics, ...aiTopics];
 
 const byKey = new Map(allTopics.map((topic) => [`${topic.track}:${topic.slug}`, topic]));
 
 export function isTrack(value: string): value is TrackId {
-  return value === "dsa" || value === "hld" || value === "lld";
+  return value === "dsa" || value === "hld" || value === "lld" || value === "ai";
 }
 
 export function topicsFor(track: TrackId): Topic[] {
@@ -112,6 +113,7 @@ export function featuredCoreTopics(): Topic[] {
     ["dsa", "knapsack-01"],
     ["hld", "url-shortener"],
     ["lld", "parking-lot"],
+    ["ai", "tokens"],
   ];
   return slugs.map(([track, slug]) => getTopic(track, slug)).filter((topic): topic is Topic => Boolean(topic));
 }

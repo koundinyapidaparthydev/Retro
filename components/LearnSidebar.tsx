@@ -15,7 +15,7 @@ import {
   trackFromPath,
 } from "@/lib/learn";
 
-const TRACK_IDS: TrackId[] = ["dsa", "hld", "lld"];
+const TRACK_IDS: TrackId[] = ["dsa", "hld", "lld", "ai"];
 
 function LearnSidebarInner() {
   const pathname = usePathname();

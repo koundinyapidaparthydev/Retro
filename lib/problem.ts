@@ -5,6 +5,7 @@ import { PACK as PACK_B } from "@/content/problems/pack-b";
 import { PACK as PACK_C } from "@/content/problems/pack-c";
 import { PACK as PACK_D } from "@/content/problems/pack-d";
 import { PACK as PACK_HLD } from "@/content/problems/pack-hld";
+import { PACK as PACK_AI } from "@/content/problems/pack-ai";
 import { PACK as PACK_LLD } from "@/content/problems/pack-lld";
 import type { ProblemCard } from "@/content/problems/types";
 import type { Topic } from "@/content/schema";
@@ -26,6 +27,7 @@ function allProblems(): Record<string, ProblemCard> {
     prefix("dsa", PACK_D),
     prefix("hld", PACK_HLD),
     prefix("lld", PACK_LLD),
+    prefix("ai", PACK_AI),
     prefix("dsa", CORE_PROBLEMS),
   );
 }
@@ -41,6 +43,19 @@ function fallbackProblem(topic: Topic): ProblemCard {
   const example = ex
     ? [ex.input ?? ex.setup, ex.result].filter(Boolean).join(" → ")
     : (topic.practiceIdeas[1] ?? topic.practiceIdeas[0] ?? "");
+
+  if (topic.track === "ai") {
+    return {
+      given: stripName(topic.summary, topic.title),
+      find: topic.whenToUse[0] ?? topic.practiceIdeas[0] ?? "Solve the situation. Do not start from the paper name.",
+      example,
+      askedAs: askedFrom(topic, [
+        topic.practiceIdeas[0],
+        topic.interviewTips[0],
+        topic.pitfalls[0],
+      ]),
+    };
+  }
 
   if (topic.track === "dsa") {
     return {

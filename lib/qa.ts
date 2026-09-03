@@ -140,6 +140,21 @@ function generateQa(topic: Topic): TopicQa {
   const pit = topic.pitfalls[0];
   const trade = topic.tradeoffs?.[0] ?? topic.whenNotToUse?.[0];
 
+  if (topic.track === "ai") {
+    return {
+      howQuestionsCome: [
+        topic.practiceIdeas[0] ?? `Here is a messy product situation. ${name} is the tool, not the title.`,
+        tip ? `${tip}` : `How do you know a change did not make it worse?`,
+        `Walk a tiny example. Do not start from the paper name.`,
+        pit ? `What goes wrong if ${pit.toLowerCase()}` : `The docs changed yesterday. Now what?`,
+      ].slice(0, 4),
+      howToAnswer: {
+        firstMinute: `${topic.summary} I'd state the problem first, then the check (eval, token budget, or SQL allow-list).`,
+        deepDive: `Next notch: ${topic.howItWorks[1] ?? topic.howItWorks[0]}. ${trade ? `Tradeoff: ${trade}` : ""}`.trim(),
+      },
+    };
+  }
+
   if (topic.track === "dsa") {
     return {
       howQuestionsCome: [

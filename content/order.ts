@@ -54,10 +54,21 @@ const LLD_CATEGORY_ORDER = [
   "Pattern Cheatsheet",
 ] as const;
 
+const AI_CATEGORY_ORDER = [
+  "Tokens & prompts",
+  "Meaning as numbers",
+  "RAG",
+  "Tools & evals",
+  "Data & SQL",
+  "Ship",
+  "Interview",
+] as const;
+
 const CATEGORY_ORDER: Record<TrackId, readonly string[]> = {
   dsa: DSA_CATEGORY_ORDER,
   hld: HLD_CATEGORY_ORDER,
   lld: LLD_CATEGORY_ORDER,
+  ai: AI_CATEGORY_ORDER,
 };
 
 const DSA_CATEGORY_LABEL: Record<string, string> = {
@@ -256,10 +267,31 @@ const LLD_MUST_HAVES = [
   "add-a-variant",
 ];
 
+const AI_MUST_HAVES = [
+  "tokens",
+  "context-window",
+  "prompt-as-spec",
+  "temperature",
+  "embeddings",
+  "cosine-similarity",
+  "keyword-vs-vector",
+  "chunking",
+  "retrieve-then-read",
+  "stale-context",
+  "function-calling",
+  "hallucination",
+  "golden-eval",
+  "text-to-sql",
+  "cost-latency",
+  "pii-in-prompts",
+  "analytics-qa-design",
+];
+
 const MUST_HAVES: Record<TrackId, string[]> = {
   dsa: DSA_MUST_HAVES,
   hld: HLD_MUST_HAVES,
   lld: LLD_MUST_HAVES,
+  ai: AI_MUST_HAVES,
 };
 
 export function categoryLabel(track: TrackId, category: string): string {

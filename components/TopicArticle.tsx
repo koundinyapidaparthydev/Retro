@@ -57,7 +57,7 @@ export function TopicArticle({ topic }: { topic: Topic }) {
         </div>
       </section>
 
-      {topic.track === "dsa" ? (
+      {topic.track === "dsa" || topic.track === "ai" ? (
         <section className="mt-8">
           <h2 className="font-serif text-3xl text-ink">Run it in JavaScript</h2>
           <p className="mt-1 text-sm text-slate">

@@ -1,4 +1,5 @@
 import type { Topic } from "@/content/schema";
+import { AI_RUNS } from "@/content/js-runs/ai";
 import { CORE_RUNS } from "@/content/js-runs/core";
 import { PACK as PACK_A } from "@/content/js-runs/pack-a";
 import { PACK as PACK_B } from "@/content/js-runs/pack-b";
@@ -13,6 +14,7 @@ const ALL: Record<string, JsRun> = {
   ...PACK_C,
   ...PACK_D,
   ...PACK_E,
+  ...AI_RUNS,
   ...CORE_RUNS,
 };
 

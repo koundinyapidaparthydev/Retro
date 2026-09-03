@@ -12,8 +12,8 @@ export default function HomePage() {
         One list. One topic.
       </h1>
       <p className="mt-4 text-base leading-7 text-ink-soft">
-        DSA, HLD, and LLD are not on at the same time. The left side is the only
-        list. Open one title. When that one is clear, open the next.
+        DSA, HLD, LLD, and AI are not on at the same time. The left side is the
+        only list. Open one title. When that one is clear, open the next.
       </p>
       {first ? (
         <p className="mt-8 text-sm leading-6 text-slate">

@@ -3,7 +3,7 @@ import { isTrack, TRACKS } from "@/content/catalog";
 import { ChapterIntro } from "@/components/ChapterIntro";
 
 export function generateStaticParams() {
-  return [{ track: "dsa" }, { track: "hld" }, { track: "lld" }];
+  return [{ track: "dsa" }, { track: "hld" }, { track: "lld" }, { track: "ai" }];
 }
 
 export async function generateMetadata({

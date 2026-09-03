@@ -1,4 +1,4 @@
-export type TrackId = "dsa" | "hld" | "lld";
+export type TrackId = "dsa" | "hld" | "lld" | "ai";
 
 export type Depth = "core" | "next" | "advanced";
 
@@ -54,6 +54,12 @@ export const TRACKS: Record<
     label: "LLD",
     full: "Low-Level Design",
     blurb: "Classes and patterns you can extend without a rewrite.",
+  },
+  ai: {
+    id: "ai",
+    label: "AI",
+    full: "Applied AI",
+    blurb: "Tokens, retrieval, evals, and SQL — one problem at a time, in JavaScript.",
   },
 };
 

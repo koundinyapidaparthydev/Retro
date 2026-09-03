@@ -83,6 +83,10 @@ export const ASKS: Record<string, AskInfo> = {
   "lld:splitwise": ask("Balances + settle.", [A, "sometimes"], [U, "sometimes"]),
   "lld:bookmyshow": ask("Seats + hold.", [A, "often"]),
   "lld:mini-uber": ask("Trip state. Uber + Amazon.", [U, "hot"], [A, "often"]),
+  "ai:retrieve-then-read": ask("Default applied-AI design. Retrieval is the product.", [G, "hot"], [Ms, "hot"], [A, "often"]),
+  "ai:golden-eval": ask("Can you score a prompt change? Applied AI gate.", [G, "hot"], [Ms, "hot"], [A, "often"]),
+  "ai:text-to-sql": ask("English over a warehouse. Check the query.", [G, "often"], [Ms, "hot"], [A, "often"]),
+  "ai:analytics-qa-design": ask("Analytics Q&A whiteboard. Unity-shaped.", [Ms, "often"], [G, "often"]),
 };
 
 export function topicAsks(track: string, slug: string): AskInfo | undefined {
@@ -91,7 +95,7 @@ export function topicAsks(track: string, slug: string): AskInfo | undefined {
 
 export const COMPANIES = [G, M, A, U, N, Ms, Ap] as const;
 
-export function heatmapRows(track: "dsa" | "hld" | "lld") {
+export function heatmapRows(track: string) {
   return Object.entries(ASKS)
     .filter(([key]) => key.startsWith(`${track}:`))
     .map(([key, info]) => ({
