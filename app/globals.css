@@ -1,84 +1,102 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0b0d0a;
-  --bg-elev: #12150f;
-  --panel: #171b13;
-  --line: #2c3224;
-  --amber: #e8b84a;
-  --amber-dim: #8a6d28;
-  --mint: #9ad36a;
-  --mint-dim: #4d7a32;
-  --text: #efe8d4;
-  --muted: #8f8976;
-  --danger: #e07a5f;
+  --sky-deep: #3d8cff;
+  --sky-mid: #9cc6ff;
+  --sky-wash: #eaf3ff;
+  --canvas: #ffffff;
+  --ink: #000000;
+  --ink-soft: #171717;
+  --slate: #5c6473;
+  --fog: #8b93a1;
+  --line: #e4e4e7;
+  --accent: #4984fd;
+  --accent-deep: #0544a8;
+  --mint: #1f9d55;
 }
 
 @theme inline {
-  --color-bg: var(--bg);
-  --color-bg-elev: var(--bg-elev);
-  --color-panel: var(--panel);
+  --color-sky-deep: var(--sky-deep);
+  --color-sky-mid: var(--sky-mid);
+  --color-sky-wash: var(--sky-wash);
+  --color-canvas: var(--canvas);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-slate: var(--slate);
+  --color-fog: var(--fog);
   --color-line: var(--line);
-  --color-amber: var(--amber);
-  --color-amber-dim: var(--amber-dim);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
   --color-mint: var(--mint);
-  --color-mint-dim: var(--mint-dim);
-  --color-ink: var(--text);
-  --color-muted: var(--muted);
-  --color-danger: var(--danger);
-  --font-sans: var(--font-plex-sans);
-  --font-mono: var(--font-plex-mono);
+  --font-sans: var(--font-geist);
+  --font-serif: var(--font-garamond);
 }
 
 html,
 body {
-  background: var(--bg);
-  color: var(--text);
+  min-height: 100%;
+  color: var(--ink);
 }
 
 body {
-  min-height: 100vh;
+  background:
+    radial-gradient(1200px 520px at 50% -80px, #5aa4ff 0%, #a9ceff 32%, #eaf3ff 62%, #ffffff 86%);
+  background-attachment: fixed;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--amber) 40%, transparent);
-  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 28%, white);
+  color: var(--ink);
 }
 
-.scanlines {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgb(0 0 0 / 0) 0,
-    rgb(0 0 0 / 0) 2px,
-    rgb(0 0 0 / 0.08) 3px
-  );
-  mix-blend-mode: multiply;
+.sky-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
 }
 
-.vignette {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  background: radial-gradient(ellipse at center, transparent 55%, rgb(0 0 0 / 0.45) 100%);
+.sky-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
 }
 
-.crt-glow {
-  box-shadow:
-    0 0 0 1px var(--line),
-    0 0 24px rgb(232 184 74 / 0.06),
-    inset 0 1px 0 rgb(255 255 255 / 0.03);
+.eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
 }
 
-.amber-link {
-  color: var(--amber);
-  text-underline-offset: 3px;
+.flow-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
 }
 
-.amber-link:hover {
-  color: #f6d27a;
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgb(73 132 253 / 0.45);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 8px rgb(73 132 253 / 0);
+  }
+}
+
+@keyframes travel {
+  0% {
+    transform: translateX(-8%);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(108%);
+    opacity: 0.2;
+  }
+}
+
+.flow-travel {
+  animation: travel 2.4s ease-in-out infinite;
 }

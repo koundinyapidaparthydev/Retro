@@ -1,40 +1,37 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { EB_Garamond, Geist } from "next/font/google";
 import { Header } from "@/components/Header";
 import "./globals.css";
 
-const plexSans = IBM_Plex_Sans({
+const geist = Geist({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-plex-sans",
+  variable: "--font-geist",
 });
 
-const plexMono = IBM_Plex_Mono({
+const garamond = EB_Garamond({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-plex-mono",
+  style: ["normal", "italic"],
+  variable: "--font-garamond",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "RETRO — knowledge archive",
+    default: "RETRO — learn DSA, HLD, LLD",
     template: "%s · RETRO",
   },
   description:
-    "Interview knowledge archive for DSA, high-level design, and low-level design. Theory, when to use it, and how to extend it.",
+    "Easy definitions, animated flows, and tiny examples for interview DSA, high-level design, and low-level design.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${plexSans.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${geist.variable} ${garamond.variable}`}>
       <body className="font-sans antialiased">
-        <div className="scanlines" />
-        <div className="vignette" />
-        <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col px-4 pb-16 pt-6 sm:px-6">
+        <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col px-4 pb-20 pt-5 sm:px-6">
           <Header />
-          <main className="flex-1 pt-8">{children}</main>
-          <footer className="mt-16 border-t border-line pt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-            RETRO v0.1 · improve on the fly · local progress only
+          <main className="flex-1 pt-10">{children}</main>
+          <footer className="mt-20 border-t border-line pt-6 text-sm text-slate">
+            RETRO · easy first · deepen later
           </footer>
         </div>
       </body>

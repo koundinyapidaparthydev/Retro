@@ -34,19 +34,19 @@ export const TRACKS: Record<
     id: "dsa",
     label: "DSA",
     full: "Data Structures & Algorithms",
-    blurb: "Search, sort, graphs, DP, and the patterns interviews actually test.",
+    blurb: "Search, sort, graphs, and DP — with a moving picture for each idea.",
   },
   hld: {
     id: "hld",
     label: "HLD",
     full: "High-Level Design",
-    blurb: "How systems scale: caches, queues, shards, and the tradeoffs behind them.",
+    blurb: "How a request travels: caches, queues, shards, and the tradeoffs.",
   },
   lld: {
     id: "lld",
     label: "LLD",
     full: "Low-Level Design",
-    blurb: "Classes, SOLID, patterns, and designs you can extend without a rewrite.",
+    blurb: "Classes and patterns you can extend without a rewrite.",
   },
 };
 

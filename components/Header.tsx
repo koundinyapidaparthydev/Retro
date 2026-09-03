@@ -10,26 +10,22 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="crt-glow flex flex-wrap items-end justify-between gap-4 bg-panel px-4 py-3 sm:px-5">
-      <Link href="/" className="group block">
-        <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-amber-dim">
-          kp archive
+    <header className="flex flex-wrap items-center justify-between gap-4 rounded-full border border-white/70 bg-white/70 px-4 py-2.5 shadow-[0_8px_30px_rgba(15,40,80,0.06)] backdrop-blur">
+      <Link href="/" className="pl-1">
+        <div className="text-[11px] font-medium tracking-[0.16em] text-accent-deep uppercase">
+          KP archive
         </div>
-        <div className="font-mono text-2xl font-semibold tracking-[0.14em] text-amber group-hover:text-[#f6d27a]">
-          RETRO
-        </div>
+        <div className="font-serif text-2xl leading-none text-ink">Retro</div>
       </Link>
-      <nav className="flex flex-wrap items-center gap-1 font-mono text-xs uppercase tracking-[0.16em]">
+      <nav className="flex flex-wrap items-center gap-1 text-sm">
         {NAV.map((id) => {
           const active = pathname === `/${id}` || pathname.startsWith(`/${id}/`);
           return (
             <Link
               key={id}
               href={`/${id}`}
-              className={`px-3 py-1.5 ${
-                active
-                  ? "bg-amber text-bg"
-                  : "text-muted hover:bg-bg-elev hover:text-ink"
+              className={`rounded-full px-3.5 py-1.5 ${
+                active ? "bg-ink text-white" : "text-ink-soft hover:bg-sky-wash"
               }`}
             >
               {TRACKS[id].label}
@@ -38,10 +34,8 @@ export function Header() {
         })}
         <Link
           href="/search"
-          className={`px-3 py-1.5 ${
-            pathname === "/search"
-              ? "bg-mint text-bg"
-              : "text-muted hover:bg-bg-elev hover:text-ink"
+          className={`rounded-full px-3.5 py-1.5 ${
+            pathname === "/search" ? "bg-accent text-white" : "text-ink-soft hover:bg-sky-wash"
           }`}
         >
           Search

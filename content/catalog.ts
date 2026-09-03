@@ -70,6 +70,7 @@ export function searchTopics(query: string, track?: TrackId): Topic[] {
       topic.category,
       topic.whyItMatters,
       ...topic.theory,
+      ...topic.howItWorks,
     ]
       .join(" ")
       .toLowerCase();

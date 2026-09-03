@@ -1,8 +1,11 @@
 import Link from "next/link";
 import type { Topic } from "@/content/schema";
 import { resolveRelated, topicPath } from "@/content/catalog";
+import { easyDefinition, workedExample } from "@/lib/explain";
 import { DepthBadge } from "./DepthBadge";
 import { ProgressToggle } from "./ProgressToggle";
+import { TopicVisual } from "./visuals/TopicVisual";
+import { WorkedExample } from "./WorkedExample";
 
 function Section({
   label,
@@ -12,9 +15,9 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="mt-10">
-      <h2 className="font-mono text-[11px] uppercase tracking-[0.22em] text-amber">{label}</h2>
-      <div className="mt-3 space-y-3 text-[15px] leading-7 text-ink/90">{children}</div>
+    <section className="mt-12">
+      <h2 className="eyebrow">{label}</h2>
+      <div className="mt-3 space-y-3 text-[16px] leading-7 text-ink-soft">{children}</div>
     </section>
   );
 }
@@ -33,68 +36,79 @@ export function TopicArticle({ topic }: { topic: Topic }) {
   const related = topic.related
     .map((slug) => resolveRelated(topic, slug))
     .filter((item): item is Topic => Boolean(item));
+  const easy = easyDefinition(topic);
+  const example = workedExample(topic);
 
   return (
     <article>
-      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-        <Link href={`/${topic.track}`} className="amber-link">
-          {topic.track}
+      <p className="text-sm text-slate">
+        <Link href={`/${topic.track}`} className="text-accent-deep hover:underline">
+          {topic.track.toUpperCase()}
         </Link>
-        <span className="mx-2 text-line">/</span>
+        <span className="mx-2 text-fog">/</span>
         {topic.category}
       </p>
       <div className="mt-3 flex flex-wrap items-start justify-between gap-4">
-        <h1 className="max-w-3xl text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+        <h1 className="max-w-3xl font-serif text-4xl leading-[1.1] tracking-tight text-ink sm:text-5xl">
           {topic.title}
         </h1>
         <DepthBadge depth={topic.depth} />
       </div>
-      <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">{topic.summary}</p>
-      <div className="mt-6">
+
+      <div className="sky-card mt-6 bg-white/90 p-6">
+        <p className="eyebrow">In plain English</p>
+        <p className="mt-2 font-serif text-2xl leading-snug text-ink">{easy}</p>
+      </div>
+
+      <div className="mt-5">
         <ProgressToggle track={topic.track} slug={topic.slug} />
       </div>
 
       {topic.complexity ? (
-        <div className="crt-glow mt-8 grid gap-4 bg-panel p-4 sm:grid-cols-3">
-          <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-amber-dim">
-              Time
-            </div>
-            <div className="mt-1 font-mono text-sm text-mint">{topic.complexity.time}</div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <div className="sky-card p-4">
+            <div className="eyebrow">Time</div>
+            <div className="mt-1 text-sm font-medium text-ink">{topic.complexity.time}</div>
           </div>
-          <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-amber-dim">
-              Space
-            </div>
-            <div className="mt-1 font-mono text-sm text-mint">{topic.complexity.space}</div>
+          <div className="sky-card p-4">
+            <div className="eyebrow">Space</div>
+            <div className="mt-1 text-sm font-medium text-ink">{topic.complexity.space}</div>
           </div>
           {topic.complexity.notes ? (
-            <div className="sm:col-span-1">
-              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-amber-dim">
-                Notes
-              </div>
-              <div className="mt-1 text-sm text-muted">{topic.complexity.notes}</div>
+            <div className="sky-card p-4">
+              <div className="eyebrow">Notes</div>
+              <div className="mt-1 text-sm text-slate">{topic.complexity.notes}</div>
             </div>
           ) : null}
         </div>
       ) : null}
 
+      <section className="mt-10">
+        <h2 className="font-serif text-3xl text-ink">See it move</h2>
+        <p className="mt-2 max-w-2xl text-slate">
+          Watch a tiny version of the idea, then read the same steps in words.
+        </p>
+        <div className="mt-5">
+          <TopicVisual topic={topic} />
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="font-serif text-3xl text-ink">A tiny example</h2>
+        <p className="mt-2 max-w-2xl text-slate">Same idea, small numbers, no interview pressure.</p>
+        <div className="mt-5">
+          <WorkedExample example={example} />
+        </div>
+      </section>
+
       <Section label="Why it matters">
         <p>{topic.whyItMatters}</p>
       </Section>
 
-      <Section label="Theory">
+      <Section label="A bit more theory">
         {topic.theory.map((paragraph) => (
           <p key={paragraph.slice(0, 40)}>{paragraph}</p>
         ))}
-      </Section>
-
-      <Section label="How it works">
-        <ol className="list-decimal space-y-2 pl-5">
-          {topic.howItWorks.map((step) => (
-            <li key={step}>{step}</li>
-          ))}
-        </ol>
       </Section>
 
       <Section label="When to use">
@@ -132,7 +146,7 @@ export function TopicArticle({ topic }: { topic: Topic }) {
               <Link
                 key={`${item.track}:${item.slug}`}
                 href={topicPath(item)}
-                className="border border-line px-2 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-muted hover:border-amber hover:text-amber"
+                className="rounded-full border border-line bg-white px-3 py-1 text-sm text-ink-soft hover:border-accent hover:text-accent-deep"
               >
                 {item.title}
               </Link>

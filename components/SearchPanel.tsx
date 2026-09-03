@@ -28,24 +28,24 @@ export function SearchPanel() {
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder={`Search ${allTopics.length} topics…`}
-        className="crt-glow w-full bg-panel px-4 py-3 font-mono text-sm text-ink outline-none placeholder:text-muted focus:border-amber"
+        className="w-full rounded-2xl border border-line bg-white px-4 py-3 text-ink outline-none placeholder:text-fog focus:border-accent"
       />
-      <div className="mt-4 flex flex-wrap gap-1">
+      <div className="mt-4 flex flex-wrap gap-1.5">
         {FILTERS.map((filter) => (
           <button
             key={filter.id}
             type="button"
             onClick={() => setTrack(filter.id)}
-            className={`px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em] ${
-              track === filter.id ? "bg-amber text-bg" : "border border-line text-muted"
+            className={`rounded-full px-3.5 py-1.5 text-sm ${
+              track === filter.id ? "bg-ink text-white" : "border border-line bg-white text-slate"
             }`}
           >
             {filter.label}
           </button>
         ))}
       </div>
-      <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-        {query.trim() ? `${results.length} matches` : "type to search"}
+      <p className="mt-4 text-sm text-slate">
+        {query.trim() ? `${results.length} matches` : "Type to search"}
       </p>
       <div className="mt-4 grid gap-3 md:grid-cols-2">
         {results.map((topic) => (

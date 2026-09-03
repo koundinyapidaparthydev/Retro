@@ -24,7 +24,7 @@ export function TrackStats({
   }, [track]);
 
   return (
-    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+    <p className="text-sm text-slate">
       {total} topics · {counts.learning} learning · {counts.known} known
     </p>
   );

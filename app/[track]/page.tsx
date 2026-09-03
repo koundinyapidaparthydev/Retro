@@ -42,18 +42,16 @@ export default async function TrackPage({
 
   return (
     <div>
-      <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-amber-dim">
-        track · {track}
-      </p>
-      <h1 className="mt-2 text-4xl font-medium tracking-tight">{meta.full}</h1>
-      <p className="mt-3 max-w-2xl text-lg leading-8 text-muted">{meta.blurb}</p>
+      <p className="eyebrow">Track · {track}</p>
+      <h1 className="mt-3 font-serif text-5xl leading-tight tracking-tight">{meta.full}</h1>
+      <p className="mt-3 max-w-2xl text-lg leading-8 text-ink-soft">{meta.blurb}</p>
       <div className="mt-4 flex flex-wrap items-center gap-4">
         <TrackStats track={track} total={stats.total} />
         <div className="flex gap-2">
           {(["core", "next", "advanced"] as Depth[]).map((depth) => (
-            <span key={depth} className="flex items-center gap-2 text-xs text-muted">
+            <span key={depth} className="flex items-center gap-2 text-sm text-slate">
               <DepthBadge depth={depth} />
-              <span className="font-mono">{stats[depth]}</span>
+              <span>{stats[depth]}</span>
             </span>
           ))}
         </div>
@@ -64,7 +62,7 @@ export default async function TrackPage({
           <a
             key={category}
             href={`#${slugify(category)}`}
-            className="border border-line px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted hover:border-amber hover:text-amber"
+            className="rounded-full border border-line bg-white px-3 py-1 text-xs text-slate hover:border-accent hover:text-accent-deep"
           >
             {category}
           </a>
@@ -74,9 +72,9 @@ export default async function TrackPage({
       <div className="mt-10 space-y-12">
         {groups.map((group) => (
           <section key={group.category} id={slugify(group.category)}>
-            <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">
+            <h2 className="font-serif text-2xl text-ink">
               {group.category}
-              <span className="ml-3 text-muted">{group.topics.length}</span>
+              <span className="ml-2 text-base text-fog">{group.topics.length}</span>
             </h2>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               {group.topics.map((topic) => (

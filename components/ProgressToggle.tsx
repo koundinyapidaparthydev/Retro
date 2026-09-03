@@ -1,11 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  getProgress,
-  setProgress,
-  type ProgressState,
-} from "@/lib/progress";
+import { getProgress, setProgress, type ProgressState } from "@/lib/progress";
 
 const OPTIONS: { id: ProgressState; label: string }[] = [
   { id: "unread", label: "Unread" },
@@ -28,7 +24,7 @@ export function ProgressToggle({ track, slug }: { track: string; slug: string })
   }, [track, slug]);
 
   return (
-    <div className="flex flex-wrap gap-1 font-mono text-[11px] uppercase tracking-[0.14em]">
+    <div className="flex flex-wrap gap-1.5 text-sm">
       {OPTIONS.map((option) => (
         <button
           key={option.id}
@@ -37,14 +33,14 @@ export function ProgressToggle({ track, slug }: { track: string; slug: string })
             setProgress(track, slug, option.id);
             setState(option.id);
           }}
-          className={`border px-2 py-1 ${
+          className={`rounded-full px-3 py-1 ${
             state === option.id
               ? option.id === "known"
-                ? "border-mint bg-mint text-bg"
+                ? "bg-mint text-white"
                 : option.id === "learning"
-                  ? "border-amber bg-amber text-bg"
-                  : "border-line bg-bg-elev text-ink"
-              : "border-line text-muted hover:text-ink"
+                  ? "bg-accent text-white"
+                  : "bg-ink text-white"
+              : "border border-line bg-white text-slate hover:text-ink"
           }`}
         >
           {option.label}
