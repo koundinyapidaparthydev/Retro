@@ -53,15 +53,15 @@ for (String w : words) {
   Arrays.sort(ch);
   String key = new String(ch);
   g.computeIfAbsent(key, k -> new ArrayList<>()).add(w);
-  System.out.println(w + " → " + key);
+  System.out.println(w + " → " + key + " size=" + g.get(key).size());
 }
-System.out.println(g);`,
+System.out.println("groups " + g.size());`,
     [
-      "eat → aet",
-      "tea → aet",
-      "tan → ant",
-      "ate → aet",
-      "{aet=[eat, tea, ate], ant=[tan]}",
+      "eat → aet size=1",
+      "tea → aet size=2",
+      "tan → ant size=1",
+      "ate → aet size=3",
+      "groups 2",
     ],
   ),
 
@@ -71,7 +71,7 @@ System.out.println(g);`,
 int k = 2;
 Map<Integer, Integer> freq = new HashMap<>();
 for (int x : nums) freq.merge(x, 1, Integer::sum);
-System.out.println("freq " + freq);
+System.out.println("1→" + freq.get(1) + " 2→" + freq.get(2) + " 3→" + freq.get(3));
 List<Integer>[] buck = new List[nums.length + 1];
 for (var e : freq.entrySet()) {
   int f = e.getValue();
@@ -87,7 +87,7 @@ for (int i = buck.length - 1; i >= 0 && ans.size() < k; i--) {
 }
 System.out.println("topK " + ans.subList(0, k));`,
     [
-      "freq {1=3, 2=2, 3=1}",
+      "1→3 2→2 3→1",
       "take freq=3 [1]",
       "take freq=2 [2]",
       "topK [1, 2]",
@@ -144,7 +144,7 @@ System.out.println("decode " + out);`,
 Set<Integer> set = new HashSet<>();
 for (int x : nums) set.add(x);
 int best = 0;
-for (int x : set) {
+for (int x : nums) {
   if (set.contains(x - 1)) continue;
   int len = 1, y = x;
   while (set.contains(y + 1)) { y++; len++; }
@@ -153,16 +153,16 @@ for (int x : set) {
 }
 System.out.println("best " + best);`,
     [
-      "run from 1 len=4",
       "run from 100 len=1",
       "run from 200 len=1",
+      "run from 1 len=4",
       "best 4",
     ],
   ),
 
   "nc-valid-palindrome": run(
     "two pointers skip junk",
-    `String s = "A man, a plan, a canal: Panama";
+    `String s = "ab_ba";
 int L = 0, R = s.length() - 1;
 boolean ok = true;
 while (L < R) {
@@ -175,15 +175,7 @@ while (L < R) {
   L++; R--;
 }
 System.out.println("palindrome? " + ok);`,
-    [
-      "a ? a",
-      "m ? m",
-      "a ? a",
-      "n ? n",
-      "a ? a",
-      "p ? p",
-      "palindrome? true",
-    ],
+    ["a ? a", "b ? b", "palindrome? true"],
   ),
 
   "nc-3sum": run(
@@ -217,20 +209,19 @@ int L = 0, R = h.length - 1, best = 0;
 while (L < R) {
   int area = Math.min(h[L], h[R]) * (R - L);
   best = Math.max(best, area);
-  System.out.println("L=" + L + " R=" + R + " area=" + area);
+  System.out.println("L=" + L + " R=" + R + " area=" + area + " best=" + best);
   if (h[L] < h[R]) L++;
   else R--;
-}
-System.out.println("best " + best);`,
+}`,
     [
-      "L=0 R=8 area=8",
-      "L=1 R=8 area=49",
-      "L=1 R=7 area=18",
-      "L=1 R=6 area=40",
-      "L=1 R=5 area=16",
-      "L=1 R=4 area=15",
-      "L=1 R=3 area=6",
-      "best 49",
+      "L=0 R=8 area=8 best=8",
+      "L=1 R=8 area=49 best=49",
+      "L=1 R=7 area=18 best=49",
+      "L=1 R=6 area=40 best=49",
+      "L=1 R=5 area=16 best=49",
+      "L=1 R=4 area=15 best=49",
+      "L=1 R=3 area=6 best=49",
+      "L=1 R=2 area=6 best=49",
     ],
   ),
 
@@ -515,11 +506,15 @@ System.out.println("max " + dfs(3));`,
 
   "nc-same-tree": run(
     "mirror recurse both roots",
-    `int[][] A = {{1, 2, 3}}, B = {{1, 2, 3}}; // preorder flat compare
-boolean same = Arrays.deepEquals(A, B);
-System.out.println("structure match? " + same);
-// recursive idea: both null → true; one null → false; vals + left + right`,
-    ["structure match? true"],
+    `int[] a = {1, 2, 3}, b = {1, 2, 3};
+boolean same = true;
+for (int i = 0; i < a.length; i++) {
+  System.out.println("cmp " + a[i] + " " + b[i]);
+  if (a[i] != b[i]) { same = false; break; }
+}
+System.out.println("same? " + same);
+// recursive: both null → true; vals equal && same(L) && same(R)`,
+    ["cmp 1 1", "cmp 2 2", "cmp 3 3", "same? true"],
   ),
 
   "nc-invert-binary-tree": run(
@@ -710,11 +705,10 @@ System.out.println("startsWith ape? " + t.starts("ape"));`,
 
   "nc-design-add-and-search-words-data-structure": run(
     "dot wildcard DFS",
-    `Set<String> dict = new HashSet<>(Set.of("bad", "dad", "mad"));
+    `String[] dict = {"bad", "dad", "mad"};
 String pat = ".ad";
 boolean hit = false;
 for (String w : dict) {
-  if (w.length() != pat.length()) continue;
   boolean ok = true;
   for (int i = 0; i < w.length(); i++)
     if (pat.charAt(i) != '.' && pat.charAt(i) != w.charAt(i)) ok = false;
@@ -780,19 +774,30 @@ System.out.println("count " + islands);`,
 
   "nc-clone-graph": run(
     "BFS map old→new",
-    `Map<Integer, List<Integer>> g = Map.of(1, List.of(2, 4), 2, List.of(1, 3));
+    `Map<Integer, List<Integer>> g = Map.of(
+  1, List.of(2, 4),
+  2, List.of(1, 3),
+  3, List.of(2, 4),
+  4, List.of(1, 3)
+);
 Map<Integer, Integer> clone = new HashMap<>();
 Queue<Integer> q = new ArrayDeque<>();
 q.add(1); clone.put(1, 1);
 while (!q.isEmpty()) {
   int u = q.poll();
   System.out.println("clone node " + u);
-  for (int v : g.getOrDefault(u, List.of())) {
+  for (int v : g.get(u)) {
     if (!clone.containsKey(v)) { clone.put(v, v); q.add(v); }
   }
 }
-System.out.println("nodes " + clone.keySet());`,
-    ["clone node 1", "clone node 2", "clone node 4", "nodes [1, 2, 4]"],
+System.out.println("nodes " + clone.size());`,
+    [
+      "clone node 1",
+      "clone node 2",
+      "clone node 4",
+      "clone node 3",
+      "nodes 4",
+    ],
   ),
 
   "nc-pacific-atlantic-water-flow": run(
@@ -1381,9 +1386,12 @@ for (int i = 0; i < 32; i++) {
   rev = (rev << 1) | (n & 1);
   n >>>= 1;
 }
-System.out.println("rev low bits " + Integer.toBinaryString(rev));
+System.out.println("binary " + Integer.toBinaryString(rev));
 System.out.println("as int " + rev);`,
-    ["rev low bits 10100000000000000000000000000000", "as int -2147483648"],
+    [
+      "binary 10100000000000000000000000000000",
+      "as int -1610612736",
+    ],
   ),
 
   "nc-missing-number": run(
@@ -1396,8 +1404,8 @@ for (int i = 0; i < nums.length; i++) {
 }
 System.out.println("missing " + x);`,
     [
-      "after i=0 x=3",
-      "after i=1 x=2",
+      "after i=0 x=0",
+      "after i=1 x=1",
       "after i=2 x=2",
       "missing 2",
     ],
