@@ -1,0 +1,14 @@
+---
+description: Push and deploy Retro after every change
+alwaysApply: true
+---
+
+# Always ship Retro
+
+After any meaningful change in this repo:
+
+1. Commit with the user's git identity (env vars only, never `git config`).
+2. Push to `origin` / `main`.
+3. GitHub Pages deploys from that push via `.github/workflows/pages.yml`.
+
+Do not wait to be asked. Local `localhost:3003` is for checking; the live site is https://koundinyapidaparthydev.github.io/Retro/

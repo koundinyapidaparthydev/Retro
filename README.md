@@ -22,4 +22,4 @@ npm run dev
 - `components/visuals/` — animated flows
 - Progress (`Unread` / `Learning` / `Known`) stays in this browser
 
-GitHub Pages deploys from `main` via `.github/workflows/pages.yml`.
+GitHub Pages deploys from every push to `main` via `.github/workflows/pages.yml`.
