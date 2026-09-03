@@ -2,6 +2,7 @@ import Link from "next/link";
 import { allTopics, featuredCoreTopics, TRACKS, trackStats, type TrackId } from "@/content/catalog";
 import { TrackStats } from "@/components/TrackStats";
 import { TopicCard } from "@/components/TopicCard";
+import { AskHeatmap } from "@/components/AskHeatmap";
 
 const ORDER: TrackId[] = ["dsa", "hld", "lld"];
 
@@ -47,6 +48,9 @@ export default function HomePage() {
         })}
       </div>
 
+      <AskHeatmap track="dsa" />
+      <AskHeatmap track="hld" />
+
       <section className="mt-12">
         <p className="eyebrow">Start here · CORE first</p>
         <h2 className="mt-2 font-serif text-3xl text-ink">The interviews ask these early</h2>
@@ -63,10 +67,9 @@ export default function HomePage() {
       <section className="sky-card mt-10 p-6">
         <h2 className="font-serif text-2xl text-ink">How to read a topic</h2>
         <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm leading-7 text-ink-soft">
-          <li>Read the one-line definition.</li>
-          <li>See how the question shows up, then the first-minute answer.</li>
-          <li>Hit Play on that topic&apos;s own diagram — not a generic pipeline.</li>
-          <li>Walk the tiny example. Then the deeper notes.</li>
+          <li>Definition, why, approach — three short cards.</li>
+          <li>Play the picture for that problem. Company chips say who asks it.</li>
+          <li>They ask / you say. Extra notes stay collapsed.</li>
         </ol>
         <p className="mt-4 text-sm text-slate">
           On <Link href="/dsa" className="text-accent-deep hover:underline">/dsa</Link>, categories

@@ -88,32 +88,59 @@ function Cells({
   const min = hi.length ? Math.min(...hi.map((id) => ids.indexOf(id))) : -1;
   const max = hi.length ? Math.max(...hi.map((id) => ids.indexOf(id))) : -1;
 
+  const leftId = Object.entries(tags ?? {}).find(([, tag]) => tag === "L")?.[0];
+  const rightId = Object.entries(tags ?? {}).find(([, tag]) => tag === "R")?.[0];
+  const leftVal = cells.find((cell) => cell.id === leftId)?.value;
+  const rightVal = cells.find((cell) => cell.id === rightId)?.value;
+  const showSum = diagram.kind === "pointers" && leftVal && rightVal;
+
   return (
-    <div className="flex flex-wrap items-end justify-center gap-2">
-      {cells.map((cell, i) => {
-        const active = windowed ? i >= min && i <= max && min >= 0 : highlight.has(cell.id);
-        const height = diagram.kind === "bars" ? 18 + (Number(cell.value) || i + 1) * 14 : undefined;
-        if (diagram.kind === "bars") {
+    <div>
+      {diagram.kind === "pointers" || windowed ? (
+        <div className="mb-4 flex flex-wrap justify-center gap-3 text-xs text-slate">
+          <span className="rounded-full bg-accent px-2 py-0.5 text-white">Looking now</span>
+          <span className="rounded-full border border-line px-2 py-0.5">Ignored this step</span>
+          {diagram.kind === "pointers" ? <span>L = left finger · R = right finger</span> : <span>Blue bar = the window</span>}
+        </div>
+      ) : null}
+      <div className="flex flex-wrap items-end justify-center gap-2">
+        {cells.map((cell, i) => {
+          const active = windowed ? i >= min && i <= max && min >= 0 : highlight.has(cell.id);
+          const tag = tags?.[cell.id] ?? "";
+          const height = diagram.kind === "bars" ? 18 + (Number(cell.value) || i + 1) * 14 : undefined;
+          if (diagram.kind === "bars") {
+            return (
+              <div key={cell.id} className="flex flex-col items-center gap-2">
+                <div
+                  className={`w-10 rounded-t-lg transition-all duration-500 ${active ? "bg-accent" : "bg-sky-mid"}`}
+                  style={{ height }}
+                />
+                <span className="text-sm font-medium">{cell.value}</span>
+              </div>
+            );
+          }
           return (
-            <div key={cell.id} className="flex flex-col items-center gap-2">
+            <div key={cell.id} className="flex w-16 flex-col items-center gap-1">
+              {tag ? (
+                <span className="rounded-full bg-ink px-2 py-0.5 text-[10px] font-semibold text-white">{tag}</span>
+              ) : (
+                <span className="h-5" />
+              )}
               <div
-                className={`w-10 rounded-t-lg transition-all duration-500 ${active ? "bg-accent" : "bg-sky-mid"}`}
-                style={{ height }}
-              />
-              <span className="text-sm font-medium">{cell.value}</span>
+                className={`flex h-16 w-16 flex-col items-center justify-center border text-lg font-semibold transition-all duration-500 ${roleShape("cell")} ${boxClass(active, windowed || diagram.kind === "pointers" ? !active : false)}`}
+              >
+                {cell.value}
+              </div>
+              <span className="text-[10px] text-fog">{i}</span>
             </div>
           );
-        }
-        return (
-          <div
-            key={cell.id}
-            className={`flex h-14 min-w-14 flex-col items-center justify-center border px-2 text-sm font-medium transition-all duration-500 ${roleShape("cell")} ${boxClass(active, windowed ? !active && min >= 0 : false)}`}
-          >
-            {cell.value}
-            <span className="text-[10px] font-normal opacity-80">{tags?.[cell.id] ?? ""}</span>
-          </div>
-        );
-      })}
+        })}
+      </div>
+      {showSum ? (
+        <p className="mt-4 text-center font-serif text-xl text-ink">
+          {leftVal} + {rightVal} = {Number(leftVal) + Number(rightVal)}
+        </p>
+      ) : null}
     </div>
   );
 }

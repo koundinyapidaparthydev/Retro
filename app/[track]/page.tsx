@@ -11,6 +11,7 @@ import {
 import { TopicCard } from "@/components/TopicCard";
 import { TrackStats } from "@/components/TrackStats";
 import { DepthBadge } from "@/components/DepthBadge";
+import { AskHeatmap } from "@/components/AskHeatmap";
 import type { Depth } from "@/content/schema";
 
 export function generateStaticParams() {
@@ -57,6 +58,8 @@ export default async function TrackPage({
           ))}
         </div>
       </div>
+
+      <AskHeatmap track={track} />
 
       <div className="mt-6 flex flex-wrap gap-2">
         {cats.map((category) => (
