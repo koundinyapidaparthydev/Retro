@@ -2,6 +2,11 @@ export type TrackId = "dsa" | "hld" | "lld";
 
 export type Depth = "core" | "next" | "advanced";
 
+export type SpokenAnswer = {
+  firstMinute: string;
+  deepDive: string;
+};
+
 export type Topic = {
   slug: string;
   track: TrackId;
@@ -24,6 +29,8 @@ export type Topic = {
   pitfalls: string[];
   practiceIdeas: string[];
   related: string[];
+  howQuestionsCome?: string[];
+  howToAnswer?: SpokenAnswer;
 };
 
 export const TRACKS: Record<

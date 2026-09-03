@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import {
   categoriesFor,
+  categoryLabel,
   groupByCategory,
   isTrack,
   topicsFor,
@@ -36,7 +37,7 @@ export default async function TrackPage({
 
   const meta = TRACKS[track];
   const topics = topicsFor(track);
-  const groups = groupByCategory(topics);
+  const groups = groupByCategory(topics, track);
   const stats = trackStats(track);
   const cats = categoriesFor(track);
 
@@ -64,7 +65,7 @@ export default async function TrackPage({
             href={`#${slugify(category)}`}
             className="rounded-full border border-line bg-white px-3 py-1 text-xs text-slate hover:border-accent hover:text-accent-deep"
           >
-            {category}
+            {categoryLabel(track, category)}
           </a>
         ))}
       </div>
@@ -73,7 +74,7 @@ export default async function TrackPage({
         {groups.map((group) => (
           <section key={group.category} id={slugify(group.category)}>
             <h2 className="font-serif text-2xl text-ink">
-              {group.category}
+              {categoryLabel(track, group.category)}
               <span className="ml-2 text-base text-fog">{group.topics.length}</span>
             </h2>
             <div className="mt-4 grid gap-3 md:grid-cols-2">

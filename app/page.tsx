@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { allTopics, TRACKS, trackStats, type TrackId } from "@/content/catalog";
+import { allTopics, featuredCoreTopics, TRACKS, trackStats, type TrackId } from "@/content/catalog";
 import { TrackStats } from "@/components/TrackStats";
+import { TopicCard } from "@/components/TopicCard";
 
 const ORDER: TrackId[] = ["dsa", "hld", "lld"];
 
@@ -12,8 +13,8 @@ export default function HomePage() {
         Interview theory you can <em className="italic">actually see.</em>
       </h1>
       <p className="mt-6 max-w-xl text-lg leading-8 text-ink-soft">
-        Plain-English definitions, a moving picture of the flow, and a tiny example
-        for every DSA, HLD, and LLD topic. Then the deeper notes when you want them.
+        Plain-English definitions, how the interview question shows up, how to
+        answer it, and a picture that matches that topic — not a reused pipeline.
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-3">
         <Link href="/dsa" className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white">
@@ -46,14 +47,31 @@ export default function HomePage() {
         })}
       </div>
 
+      <section className="mt-12">
+        <p className="eyebrow">Start here · CORE first</p>
+        <h2 className="mt-2 font-serif text-3xl text-ink">The interviews ask these early</h2>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-slate">
+          DSA listings put must-haves on top. These six are the usual first stop.
+        </p>
+        <div className="mt-5 grid gap-3 md:grid-cols-2">
+          {featuredCoreTopics().map((topic) => (
+            <TopicCard key={`${topic.track}:${topic.slug}`} topic={topic} />
+          ))}
+        </div>
+      </section>
+
       <section className="sky-card mt-10 p-6">
         <h2 className="font-serif text-2xl text-ink">How to read a topic</h2>
         <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm leading-7 text-ink-soft">
-          <li>Read the one-line definition. If that clicks, you already have the idea.</li>
-          <li>Hit Play on the flow. Pause any step.</li>
-          <li>Walk the tiny example with small numbers.</li>
-          <li>Only then read theory, tips, and practice.</li>
+          <li>Read the one-line definition.</li>
+          <li>See how the question shows up, then the first-minute answer.</li>
+          <li>Hit Play on that topic&apos;s own diagram — not a generic pipeline.</li>
+          <li>Walk the tiny example. Then the deeper notes.</li>
         </ol>
+        <p className="mt-4 text-sm text-slate">
+          On <Link href="/dsa" className="text-accent-deep hover:underline">/dsa</Link>, categories
+          run Arrays → Hashing → two pointers → binary search → … → advanced, with CORE cards first.
+        </p>
       </section>
     </div>
   );

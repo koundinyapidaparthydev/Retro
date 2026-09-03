@@ -3,6 +3,7 @@ import type { Topic } from "@/content/schema";
 import { resolveRelated, topicPath } from "@/content/catalog";
 import { easyDefinition, workedExample } from "@/lib/explain";
 import { DepthBadge } from "./DepthBadge";
+import { InterviewQa } from "./InterviewQa";
 import { ProgressToggle } from "./ProgressToggle";
 import { TopicVisual } from "./visuals/TopicVisual";
 import { WorkedExample } from "./WorkedExample";
@@ -63,6 +64,10 @@ export function TopicArticle({ topic }: { topic: Topic }) {
       <div className="mt-5">
         <ProgressToggle track={topic.track} slug={topic.slug} />
       </div>
+
+      <section className="mt-10">
+        <InterviewQa topic={topic} />
+      </section>
 
       {topic.complexity ? (
         <div className="mt-8 grid gap-4 sm:grid-cols-3">

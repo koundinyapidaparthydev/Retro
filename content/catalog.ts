@@ -3,8 +3,9 @@ import { TRACKS } from "./schema";
 import { dsaTopics } from "./dsa";
 import { hldTopics } from "./hld";
 import { lldTopics } from "./lld";
+import { categoryLabel, depthRank, orderedCategories, sortTopicsForListing } from "./order";
 
-export { TRACKS };
+export { TRACKS, categoryLabel };
 export type { Depth, Topic, TrackId };
 
 export const allTopics: Topic[] = [...dsaTopics, ...hldTopics, ...lldTopics];
@@ -16,7 +17,10 @@ export function isTrack(value: string): value is TrackId {
 }
 
 export function topicsFor(track: TrackId): Topic[] {
-  return allTopics.filter((topic) => topic.track === track);
+  return sortTopicsForListing(
+    allTopics.filter((topic) => topic.track === track),
+    track,
+  );
 }
 
 export function getTopic(track: TrackId, slug: string): Topic | undefined {
@@ -35,47 +39,58 @@ export function resolveRelated(from: Topic, slug: string): Topic | undefined {
 }
 
 export function categoriesFor(track: TrackId): string[] {
+  const found: string[] = [];
   const seen = new Set<string>();
-  const order: string[] = [];
   for (const topic of topicsFor(track)) {
     if (!seen.has(topic.category)) {
       seen.add(topic.category);
-      order.push(topic.category);
+      found.push(topic.category);
     }
   }
-  return order;
+  return orderedCategories(track, found);
 }
 
-export function groupByCategory(topics: Topic[]): { category: string; topics: Topic[] }[] {
+export function groupByCategory(topics: Topic[], track?: TrackId): { category: string; topics: Topic[] }[] {
   const groups = new Map<string, Topic[]>();
   for (const topic of topics) {
     const list = groups.get(topic.category) ?? [];
     list.push(topic);
     groups.set(topic.category, list);
   }
-  return [...groups.entries()].map(([category, grouped]) => ({
-    category,
-    topics: grouped,
-  }));
+  const inferred = track ?? topics[0]?.track;
+  const order = inferred ? categoriesFor(inferred) : [...groups.keys()];
+  return order
+    .filter((category) => groups.has(category))
+    .map((category) => ({
+      category,
+      topics: inferred ? sortTopicsForListing(groups.get(category) ?? [], inferred) : (groups.get(category) ?? []),
+    }));
 }
 
 export function searchTopics(query: string, track?: TrackId): Topic[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
   const pool = track ? topicsFor(track) : allTopics;
-  return pool.filter((topic) => {
-    const hay = [
-      topic.title,
-      topic.summary,
-      topic.category,
-      topic.whyItMatters,
-      ...topic.theory,
-      ...topic.howItWorks,
-    ]
-      .join(" ")
-      .toLowerCase();
-    return hay.includes(q);
-  });
+  return pool
+    .filter((topic) => {
+      const hay = [
+        topic.title,
+        topic.summary,
+        topic.category,
+        topic.whyItMatters,
+        ...topic.theory,
+        ...topic.howItWorks,
+      ]
+        .join(" ")
+        .toLowerCase();
+      return hay.includes(q);
+    })
+    .sort((a, b) => {
+      const depth = depthRank(a.depth) - depthRank(b.depth);
+      if (depth) return depth;
+      if (a.track !== b.track) return a.track.localeCompare(b.track);
+      return a.title.localeCompare(b.title);
+    });
 }
 
 export function trackStats(track: TrackId) {
@@ -87,4 +102,16 @@ export function trackStats(track: TrackId) {
     advanced: topics.filter((topic) => topic.depth === "advanced").length,
     categories: categoriesFor(track).length,
   };
+}
+
+export function featuredCoreTopics(): Topic[] {
+  const slugs: [TrackId, string][] = [
+    ["dsa", "binary-search"],
+    ["dsa", "two-pointers"],
+    ["dsa", "bfs"],
+    ["dsa", "knapsack-01"],
+    ["hld", "url-shortener"],
+    ["lld", "parking-lot"],
+  ];
+  return slugs.map(([track, slug]) => getTopic(track, slug)).filter((topic): topic is Topic => Boolean(topic));
 }
