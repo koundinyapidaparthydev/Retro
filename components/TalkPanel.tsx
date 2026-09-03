@@ -21,7 +21,7 @@ const CHIPS = [
   "Give me the tiny example.",
   "How do I approach it?",
   "How would they ask this?",
-  "Show it in JavaScript.",
+  "Show it in Java.",
 ];
 
 function openerFor(topic: Topic) {

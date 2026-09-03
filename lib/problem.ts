@@ -7,6 +7,8 @@ import { PACK as PACK_D } from "@/content/problems/pack-d";
 import { PACK as PACK_HLD } from "@/content/problems/pack-hld";
 import { PACK as PACK_AI } from "@/content/problems/pack-ai";
 import { PACK as PACK_LLD } from "@/content/problems/pack-lld";
+import { PACK as PACK_NC75 } from "@/content/problems/pack-nc75";
+import { PACK as PACK_NC150 } from "@/content/problems/pack-nc150";
 import type { ProblemCard } from "@/content/problems/types";
 import type { Topic } from "@/content/schema";
 
@@ -28,6 +30,8 @@ function allProblems(): Record<string, ProblemCard> {
     prefix("hld", PACK_HLD),
     prefix("lld", PACK_LLD),
     prefix("ai", PACK_AI),
+    prefix("dsa", PACK_NC150),
+    prefix("dsa", PACK_NC75),
     prefix("dsa", CORE_PROBLEMS),
   );
 }

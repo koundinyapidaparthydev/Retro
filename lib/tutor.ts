@@ -1,5 +1,5 @@
 import type { Topic } from "@/content/schema";
-import { jsRunFor } from "./jsRun";
+import { javaRunFor } from "./javaRun";
 import { lesson } from "./lesson";
 import { problemFor } from "./problem";
 import { topicQa } from "./qa";
@@ -18,7 +18,7 @@ function geminiContext(topic: Topic) {
     `Approach: ${l.approach.join(" → ")}`,
     `They ask: ${p.askedAs.join(" | ")}`,
     `Answer first minute: ${topicQa(topic).howToAnswer.firstMinute}`,
-    `Keep answers short. Start from the problem, then the JS idea (arrays, Map, Set).`,
+    `Keep answers short. Start from the problem, then the Java idea (arrays, HashMap, HashSet, Queue).`,
   ].join("\n");
 }
 
@@ -31,7 +31,7 @@ export function localAnswer(topic: Topic, question: string): string {
   const p = problemFor(topic);
   const l = lesson(topic);
   const qa = topicQa(topic);
-  const run = jsRunFor(topic);
+  const run = javaRunFor(topic);
 
   if (match(q, ["problem", "given", "what do they ask", "statement", "prompt", "question", "how would they"])) {
     return `They will not say “${topic.title}.” They will say something like: ${p.askedAs[0] ?? p.find} Given: ${p.given} Find: ${p.find}`;
@@ -45,8 +45,8 @@ export function localAnswer(topic: Topic, question: string): string {
   if (match(q, ["approach", "how do i", "steps", "walk"])) {
     return `Start from the problem, not the name. ${l.approach.map((s, i) => `${i + 1}. ${s}`).join(" ")}`;
   }
-  if (match(q, ["javascript", "js", "code", "console", "run"])) {
-    return `In JavaScript: ${run.title}. ${run.logs[0] ?? ""} The console on this page walks the rest, one log at a time.`;
+  if (match(q, ["javascript", "js", "java", "code", "console", "run", "system.out"])) {
+    return `In Java: ${run.title}. ${run.logs[0] ?? ""} The output panel walks the rest, one println at a time.`;
   }
   if (match(q, ["answer", "say first", "first minute", "interview"])) {
     return qa.howToAnswer.firstMinute;
