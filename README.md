@@ -1,25 +1,19 @@
-# Retro
+# RETRO
 
-Interview knowledge archive for **DSA**, **high-level design**, and **low-level design**.
+Mid-level (3 YOE) learning track: DSA × AI roadmap + curated Algos problem pack.
 
-Every topic opens with a plain-English definition, an animated flow, and a tiny example — then the deeper notes.
+Live: https://koundinyapidaparthydev.github.io/Retro/
 
-## Live
-
-https://koundinyapidaparthydev.github.io/Retro/
-
-## Run locally
+## Local
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Layout
+Progress checkboxes save in the browser (`localStorage`).
 
-- `content/` — topic source of truth
-- `content/examples.ts` — easier definitions and worked examples
-- `components/visuals/` — animated flows
-- Progress (`Unread` / `Learning` / `Known`) stays in this browser
+## Source
 
-GitHub Pages deploys from every push to `main` via `.github/workflows/pages.yml`.
+- Talk: [DSA vs AI — What to Learn in 2026?](https://www.youtube.com/watch?v=yzkKVFX4-bE)
+- Problem list: Algos.pdf (NeetCode-style pattern pack)
