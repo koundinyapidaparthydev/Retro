@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
 :root {
-  --sky-deep: #2a2a2a;
-  --sky-mid: #8a8a8a;
-  --sky-wash: #ebe8e2;
-  --canvas: #e8e6e1;
-  --paper: #f3f1eb;
-  --wash: #ddd9d1;
-  --ink: #1c1c1c;
-  --ink-soft: #2e2e2e;
-  --slate: #5c5c5c;
-  --fog: #8a8a8a;
-  --line: #cfcbc3;
-  --accent: #2a2a2a;
-  --accent-deep: #1c1c1c;
-  --mint: #4a4a4a;
+  --bg: #0c1117;
+  --bg-elev: #131a22;
+  --bg-soft: #1a2330;
+  --line: rgba(232, 220, 196, 0.12);
+  --text: #ebe4d6;
+  --muted: #9aa3b0;
+  --amber: #e8a54b;
+  --amber-dim: rgba(232, 165, 75, 0.16);
+  --teal: #3ecfad;
+  --teal-dim: rgba(62, 207, 173, 0.14);
+  --danger: #ef7a6a;
+  --radius: 14px;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+
+  /* mapped aliases used by components */
+  --canvas: var(--bg);
+  --paper: var(--bg-elev);
+  --wash: var(--bg-soft);
+  --ink: var(--text);
+  --ink-soft: #d5cfc0;
+  --slate: var(--muted);
+  --fog: #7a8494;
+  --accent: var(--teal);
+  --accent-deep: var(--amber);
 }
 
 @theme inline {
-  --color-sky-deep: var(--sky-deep);
-  --color-sky-mid: var(--sky-mid);
-  --color-sky-wash: var(--sky-wash);
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-bg-soft: var(--bg-soft);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-amber: var(--amber);
+  --color-amber-dim: var(--amber-dim);
+  --color-teal: var(--teal);
+  --color-teal-dim: var(--teal-dim);
+  --color-danger: var(--danger);
   --color-canvas: var(--canvas);
   --color-paper: var(--paper);
   --color-wash: var(--wash);
@@ -28,77 +46,102 @@
   --color-ink-soft: var(--ink-soft);
   --color-slate: var(--slate);
   --color-fog: var(--fog);
-  --color-line: var(--line);
   --color-accent: var(--accent);
   --color-accent-deep: var(--accent-deep);
-  --color-mint: var(--mint);
-  --font-sans: var(--font-geist);
-  --font-serif: var(--font-garamond);
+  --font-sans: var(--font-plex);
+  --font-display: var(--font-bricolage);
+  --font-mono: var(--font-plex-mono);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
 body {
   min-height: 100%;
-  color: var(--ink);
+  color: var(--text);
 }
 
 body {
-  background: var(--canvas);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(232, 165, 75, 0.14), transparent 55%),
+    radial-gradient(900px 500px at 95% 5%, rgba(62, 207, 173, 0.12), transparent 50%),
+    linear-gradient(180deg, #0c1117 0%, #0a0e14 100%);
+  font-family: var(--font-plex), system-ui, sans-serif;
+  line-height: 1.55;
 }
 
 ::selection {
-  background: #d4d0c8;
-  color: var(--ink);
+  background: rgba(62, 207, 173, 0.28);
+  color: var(--text);
 }
 
-.sky-card {
-  background: var(--paper);
+.panel {
+  background: linear-gradient(180deg, rgba(26, 35, 48, 0.9), rgba(19, 26, 34, 0.95));
   border: 1px solid var(--line);
-  border-radius: 10px;
-}
-
-.sky-card:hover {
-  border-color: #b8b4ac;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 .eyebrow {
-  font-size: 12px;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: var(--muted);
 }
 
-.flow-dot {
-  animation: pulse-dot 1.6s ease-in-out infinite;
+.toc-chip {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(19, 26, 34, 0.7);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.2s, background 0.2s;
 }
 
-@keyframes pulse-dot {
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgb(28 28 28 / 0.18);
-  }
-  50% {
-    transform: scale(1.08);
-    box-shadow: 0 0 0 8px rgb(28 28 28 / 0);
-  }
+.toc-chip:hover {
+  border-color: rgba(232, 220, 196, 0.28);
+  background: var(--bg-soft);
 }
 
-@keyframes travel {
-  0% {
-    transform: translateX(-8%);
-    opacity: 0.2;
+.progress-track {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--amber), var(--teal));
+  transition: width 0.35s ease;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-  50% {
+  to {
     opacity: 1;
-  }
-  100% {
-    transform: translateX(108%);
-    opacity: 0.2;
+    transform: translateY(0);
   }
 }
 
-.flow-travel {
-  animation: travel 2.4s ease-in-out infinite;
+.rise {
+  animation: rise 0.7s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
 }
